@@ -12,7 +12,6 @@ import { PaymentPage } from './components/PaymentPage';
 import { OrderConfirmationModal } from './components/OrderConfirmationModal';
 import { UserAccountModal } from './components/UserAccountModal';
 import { InfoPages } from './components/InfoPages';
-import { AdminDashboard } from './components/AdminDashboard';
 import { testConnection, saveOrderToFirestore, saveCustomerToFirestore } from './lib/firebase';
 import { 
   Search, 
@@ -31,9 +30,6 @@ export default function App() {
   // Navigation State
   const [currentTab, setCurrentTab] = useState<string>(() => {
     const path = window.location.pathname.toLowerCase();
-    const search = window.location.search.toLowerCase();
-    const hash = window.location.hash.toLowerCase();
-    if (path.includes('admin') || path.includes('dashboard') || search.includes('admin') || search.includes('dashboard') || hash.includes('admin')) return 'admin';
     if (path.includes('cartepage') || path.includes('cart')) return 'cart';
     if (path.includes('card-payment') || path.includes('payment')) return 'payment';
     if (path.includes('how-to-order')) return 'how-to-order';
@@ -83,11 +79,7 @@ export default function App() {
   useEffect(() => {
     const handleUrlChange = () => {
       const path = window.location.pathname.toLowerCase();
-      const search = window.location.search.toLowerCase();
-      const hash = window.location.hash.toLowerCase();
-      if (path.includes('admin') || path.includes('dashboard') || search.includes('admin') || search.includes('dashboard') || hash.includes('admin')) {
-        setCurrentTab('admin');
-      } else if (path.includes('cartepage') || path.includes('cart')) {
+      if (path.includes('cartepage') || path.includes('cart')) {
         setCurrentTab('cart');
       } else if (path.includes('card-payment') || path.includes('payment')) {
         setCurrentTab('payment');
@@ -129,8 +121,7 @@ export default function App() {
   const navigateTo = (tab: string) => {
     setCurrentTab(tab);
     let newPath = '/';
-    if (tab === 'admin' || tab === 'dashboard') newPath = '/?admin=true';
-    else if (tab === 'cart') newPath = '/cartepage.html';
+    if (tab === 'cart') newPath = '/cartepage.html';
     else if (tab === 'payment') newPath = '/card-payment.html';
     else if (tab === 'how-to-order') newPath = '/how-to-order.html';
     else if (tab === 'terms') newPath = '/terms.html';
@@ -496,14 +487,6 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 5: ADMIN DASHBOARD & FIRESTORE DATABASE */}
-        {currentTab === 'admin' && (
-          <AdminDashboard
-            onBackToStore={() => navigateTo('home')}
-            onViewOrderReceipt={(order) => setCompletedOrder(order)}
-          />
-        )}
-
       </main>
 
       {/* Floating Bottom Cart Bar */}
@@ -568,10 +551,6 @@ export default function App() {
         isOpen={isAccountModalOpen}
         onClose={() => setIsAccountModalOpen(false)}
         onViewReceipt={(order) => setCompletedOrder(order)}
-        onOpenAdmin={() => {
-          setIsAccountModalOpen(false);
-          navigateTo('admin');
-        }}
       />
 
       {/* Quick Search Modal */}

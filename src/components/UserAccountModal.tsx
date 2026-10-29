@@ -234,35 +234,6 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
             </div>
           )}
 
-          {/* Database & Admin Console Shortcut */}
-          <div className="bg-red-50/70 border border-red-200/80 rounded-2xl p-3.5 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#c8102e] text-white flex items-center justify-center shadow-xs shrink-0">
-                <Database className="w-4 h-4" />
-              </div>
-              <div className="text-right">
-                <div className="font-extrabold text-xs text-gray-900">
-                  لوحة التحكم وقاعدة البيانات
-                </div>
-                <div className="text-[10px] text-gray-500">
-                  استعراض جميع التسجيلات والطلبات المحفوظة في فايربيز
-                </div>
-              </div>
-            </div>
-            {onOpenAdmin && (
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onOpenAdmin();
-                }}
-                className="bg-[#c8102e] hover:bg-[#a60b24] text-white text-xs font-bold py-1.5 px-3 rounded-xl transition shadow-xs cursor-pointer whitespace-nowrap"
-              >
-                فتح اللوحة
-              </button>
-            )}
-          </div>
-
           {/* Quick Search for Any Order by BH-XXXXXX */}
           <div className="space-y-2">
             <label className="block text-xs font-bold text-gray-700">

@@ -34,7 +34,7 @@ export const PaymentPage: React.FC<PaymentPageProps> = ({
   const [cardNumber, setCardNumber] = useState('');
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
-  const [cardHolder, setCardHolder] = useState(customerDetails.name || 'Ibrahim');
+  const [cardHolder, setCardHolder] = useState(customerDetails.name || '');
   const [pin, setPin] = useState('');
 
   // UI & Flow states
@@ -42,7 +42,7 @@ export const PaymentPage: React.FC<PaymentPageProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingText, setProcessingText] = useState('');
   const [showOtpModal, setShowOtpModal] = useState(false);
-  const [otpCode, setOtpCode] = useState('7492');
+  const [otpCode, setOtpCode] = useState('');
   const [otpTimer, setOtpTimer] = useState(60);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -308,41 +308,8 @@ export const PaymentPage: React.FC<PaymentPageProps> = ({
   return (
     <div className="min-h-screen bg-[#1c1c1e] flex flex-col items-center justify-start py-4 sm:py-8 px-2 sm:px-4 font-sans text-gray-900" dir="ltr">
       
-      {/* Outer Mobile Wrapper Matching Screenshot Header */}
+      {/* Outer Mobile Wrapper */}
       <div className="w-full max-w-[430px] flex flex-col items-center">
-        
-        {/* Top Bar: Amazon Payment Services Header */}
-        <div className="w-full bg-[#1c1c1e] text-white px-4 py-3 flex items-center justify-between">
-          <button
-            onClick={onCancel}
-            className="text-gray-300 hover:text-white p-1 rounded-full transition cursor-pointer"
-            title="Close / إلغاء"
-          >
-            <X className="w-5 h-5" />
-          </button>
-          
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-gray-200">
-              Amazon Payment Services
-            </span>
-            <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center font-bold text-black text-xs">
-              a
-            </div>
-          </div>
-
-          <div className="w-5"></div>
-        </div>
-
-        {/* Demo Fast Fill Helper */}
-        <div className="w-full mb-3 px-1">
-          <button
-            type="button"
-            onClick={handleQuickDemoFill}
-            className="w-full bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 text-red-300 text-xs py-2 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition cursor-pointer"
-          >
-            <span>⚡ تعبئة بيانات بطاقة بنفت التجريبية تلقائياً (1-Click Demo Fill)</span>
-          </button>
-        </div>
 
         {/* Phone Body Frame Container */}
         <div className="w-full bg-white rounded-[36px] shadow-2xl p-6 sm:p-7 relative border border-gray-200 min-h-[620px] flex flex-col justify-between">
@@ -686,13 +653,10 @@ export const PaymentPage: React.FC<PaymentPageProps> = ({
                   maxLength={6}
                   value={otpCode}
                   onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
-                  placeholder="7492"
+                  placeholder="••••••"
                   className="w-full h-12 text-center text-2xl font-mono font-black tracking-widest border-2 border-[#c8102e] rounded-xl focus:outline-none focus:ring-4 focus:ring-red-100"
                   dir="ltr"
                 />
-                <p className="text-[11px] text-gray-400 mt-1">
-                  (رمز التحقق التجريبي الجاهز للاختبار: <span className="font-bold text-gray-700">7492</span>)
-                </p>
               </div>
 
               {/* Timer */}
@@ -716,7 +680,7 @@ export const PaymentPage: React.FC<PaymentPageProps> = ({
                   disabled={otpTimer > 0}
                   onClick={() => {
                     setOtpTimer(60);
-                    setOtpCode('7492');
+                    setOtpCode('');
                   }}
                   className={`w-full py-2 text-xs font-bold rounded-lg transition ${
                     otpTimer > 0 ? 'text-gray-400 cursor-not-allowed' : 'text-emerald-700 hover:bg-emerald-50'
