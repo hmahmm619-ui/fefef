@@ -1,0 +1,8 @@
+{
+  "name": "دلمون البحرين | متجر شركة دلمون للدواجن (dawajen.bh)",
+  "description": "المتجر الرسمي لشركة دلمون للدواجن (ش.م.ب) في مملكة البحرين — دجاج طازج يومياً، فيليه وصدور، دجاج متبل، وعروض التوفير مع توصيل مبرد فوري وسداد عبر بنفت.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
